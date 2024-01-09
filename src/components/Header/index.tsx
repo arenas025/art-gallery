@@ -1,8 +1,13 @@
-import React from 'react'
+'use client'
+import React, { Dispatch, SetStateAction } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Header = () => {
+export interface headerInterface {
+  setStartSlideShow?: Dispatch<SetStateAction<boolean>>
+}
+
+export const Header = ({setStartSlideShow}: headerInterface) => {
   return (
     <header className="p-6 border-b-[1px] border-semigray flex items-center justify-between mb-6">
       <Link href={"/"}>
@@ -14,9 +19,9 @@ export const Header = () => {
           alt="galleria logo"
         />
       </Link>
-      <p className="font-baskerville text-[9px] tracking-[2px] ">
+      <p onClick={()=>{setStartSlideShow!(true)}} className="font-baskerville text-[9px] tracking-[2px] cursor-pointer ">
         START SLIDESHOW
       </p>
     </header>
   );
-}
+};

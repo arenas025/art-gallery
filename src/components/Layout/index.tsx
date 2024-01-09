@@ -1,9 +1,12 @@
-import React from 'react'
-import { Header } from '../Header'
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
+import data from "../../../data.json"
+import { Header } from '../Header'
 import Stepper from '../Stepper'
-import data from "../../../data.json";
+import { ShowImage } from '../showImage'
+import { useState } from 'react'
 
 
 interface LayoutPageInterface {
@@ -15,9 +18,10 @@ interface LayoutPageInterface {
   imageAuthor:string
   id:number
   source : string
+  bigImage:string
 }
 
-export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,source}: LayoutPageInterface) => {
+export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,bigImage,source}: LayoutPageInterface) => {
 
   const urlNext = data
     .find((item) => item.id === id + 1)
@@ -28,6 +32,8 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,sou
       .find((item) => item.id === id + -1 )
       ?.name.toLowerCase()
       .replaceAll(" ", "-");
+
+    const [showImageActive, setShowImageActive] = useState<boolean>(false);
 
 
   return (
@@ -41,8 +47,16 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,sou
           src={imageArt}
           alt="image art"
         />
-        <div className="h-10 w-36 bg-white absolute top-4 left-11">
-          <Image src={"/assets/icons/expandImage.svg"} alt={"expand image"} width={12} height={12}/>
+        <div onClick={()=>{
+          setShowImageActive(true)
+        }} className=" cursor-pointer flex items-center justify-between p-3 tracking-widest  h-10 w-40 bg-black opacity-75 absolute top-4 left-11">
+          <Image
+            src={"/assets/icons/expandImage.svg"}
+            alt={"expand image"}
+            width={12}
+            height={12}
+          />
+          <p className="font-baskerville text-white text-sm">VIEW IMAGE</p>
         </div>
         <div className="absolute top-56 left-[23px] font-baskerville">
           <div className=" bg-white mb-6 relative h-28 w-72 p-6">
@@ -81,6 +95,9 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,sou
           />
         </div>
       </div>
+      {showImageActive && (
+        <ShowImage setShowImageActive={setShowImageActive} src={bigImage} />
+      )}
     </div>
   );
 };

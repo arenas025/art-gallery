@@ -11,13 +11,14 @@ const Page = ({params}:any) => {
     <Layout
       description={information?.description!}
       author={information?.artist.name!}
-      imageArt={ `/${information?.images.hero.small!}`}
+      imageArt={`/${information?.images.hero.small!}`}
       imageAuthor={`/${information?.artist.image!}`}
       name={information?.name!}
       year={information?.year!}
       key={information?.id!}
       id={information?.id!}
       source={information?.source!}
+      bigImage={`/${information?.images.gallery!}`}
     />
   );
 };

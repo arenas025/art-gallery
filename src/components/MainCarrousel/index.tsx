@@ -1,39 +1,27 @@
 "use client"
 
-import { useEffect, useState } from 'react';
-import data from '../../../data.json'
-import { Card } from '../Card'
+import { ChevronsUp } from "react-feather";
+import data from '../../../data.json';
+import { Card } from '../Card';
+import { headerInterface } from '../Header';
+import useSlideshow from "@/utils/useSlideshow";
 
 
+interface carrouselInterface extends headerInterface {
+  startSlideShow:boolean;
+}
 
 
-export const MainCarrousel = () => {
+export const MainCarrousel = ({startSlideShow,setStartSlideShow}: carrouselInterface) => {
+
+const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlideshow({data,setStartSlideShow})
 
 
-const [isOnView, setIsOnView] = useState<string>("")
+  if (startSlideShow){
+    slideshowStart()
+  }
 
-useEffect(() => {
-  const observerOptions: IntersectionObserverInit = {
-    rootMargin: "-50% 0% -50% 0% ",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setIsOnView(entry.target.id);
-      }
-    });
-  }, observerOptions);
-
-  data.forEach((item) => {
-    const target = document.querySelector(`#card-${item.id}`);
-    observer.observe(target!);
-  });
-
-  return () => {
-    observer.disconnect();
-  };
-}, []);
+  useAnimationMaximizeCover()
 
   return (
     <div
@@ -54,6 +42,15 @@ useEffect(() => {
           />
         );
       })}
+      <div
+        onClick={backToTop}
+        className="absolute cursor-pointer w-40 rounded-3xl items-center flex justify-center h-10 bg-[#ffffffc6] bottom-8 z-20"
+      >
+        <p className="text-black font-bold font-baskerville">
+          Volver al inicio
+        </p>
+        <ChevronsUp />
+      </div>
     </div>
   );
-}
+};
