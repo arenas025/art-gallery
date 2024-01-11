@@ -21,7 +21,7 @@ const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlidesh
     slideshowStart()
   }
 
-  useAnimationMaximizeCover()
+  // useAnimationMaximizeCover()
 
   return (
     <div
