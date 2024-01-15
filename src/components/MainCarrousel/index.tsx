@@ -26,7 +26,7 @@ const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlidesh
   return (
     <div
       id="scrollArea"
-      className="flex flex-col items-center gap-6 px-6 pb-6 relative"
+      className="flex flex-col items-center gap-6 px-6 pb-6 relative bg-yellow-400"
     >
       {data.map((item) => {
         return (

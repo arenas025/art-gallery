@@ -9,7 +9,7 @@ export interface headerInterface {
 
 export const Header = ({setStartSlideShow}: headerInterface) => {
   return (
-    <header className="p-6 border-b-[1px] border-semigray flex items-center justify-between mb-6">
+    <header className="p-6 border-b-[1px] bg-blue-500 border-semigray flex items-center justify-between mb-6">
       <Link href={"/"}>
         <Image
           priority={true}
