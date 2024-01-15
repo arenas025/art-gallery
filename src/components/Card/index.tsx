@@ -17,7 +17,7 @@ export const Card = ({artist,id, title,image,visible}: cardProps) => {
     <Link href={`/${url}`}>
       <div
         className={`${
-          visible ? "scale-110" : "scale - 95"
+          visible ? "opacity-100" : "opacity-50"
         } duration-200 w-full h-[400px] z-10 relative ease-in`}
         id={id}
       >

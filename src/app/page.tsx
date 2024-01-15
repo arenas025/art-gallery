@@ -9,7 +9,7 @@ export default function Home() {
   const [startSlideShow, setStartSlideShow] = useState<boolean>(false)
 
   return (
-    <main className="bg-red-500">
+    <main>
       <Header setStartSlideShow={setStartSlideShow} />
       <MainCarrousel setStartSlideShow={setStartSlideShow} startSlideShow={startSlideShow} />
     </main>
