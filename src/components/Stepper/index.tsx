@@ -16,7 +16,7 @@ const Stepper = ({actualItem,author,back,next,title,totalItems,percentage}: Step
 
 
   return (
-    <div className="border-t-[1px] absolute -left-6 w-screen border-semigray h-[70px]">
+    <div className="border-t-[1px] sm:fixed sm:left-0 sm:bottom-0 absolute -left-6 w-screen border-semigray h-[70px]">
       <div style={{width:`${percentage}%`}} className={`bg-black h-[1px]`} />
       <div>
         <div className="font-baskerville flex justify-between mr-6 mt-4 ml-6">

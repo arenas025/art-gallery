@@ -5,6 +5,7 @@ import data from '../../../data.json';
 import { Card } from '../Card';
 import { headerInterface } from '../Header';
 import useSlideshow from "@/utils/useSlideshow";
+import { useEffect } from "react";
 
 
 interface carrouselInterface extends headerInterface {
@@ -16,17 +17,19 @@ export const MainCarrousel = ({startSlideShow,setStartSlideShow}: carrouselInter
 
 const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlideshow({data,setStartSlideShow})
 
+  useAnimationMaximizeCover();
 
   if (startSlideShow){
     slideshowStart()
   }
 
-  useAnimationMaximizeCover()
+  
+  
 
   return (
     <div
       id="scrollArea"
-      className="flex flex-col items-center gap-6 px-6 pb-6 relative"
+      className="flex sm:flex-row sm:flex-wrap flex-col sm:items-center sm:justify-center items-center gap-6 px-6 pb-6 relative"
     >
       {data.map((item) => {
         return (

@@ -21,9 +21,7 @@ const useSlideshow = ({setStartSlideShow,data}:useSlideshow) => {
     // Calcula la posición hacia abajo (puedes ajustar la cantidad según sea necesario)
     const targetScroll = currentScroll + area!.scrollHeight;
 
-    const duration = 15000;
-
-    console.log(height);
+    const duration = 20000;
 
     const startTime = performance.now();
 
@@ -33,7 +31,7 @@ const useSlideshow = ({setStartSlideShow,data}:useSlideshow) => {
 
     function animateScroll(time: number) {
       // Calcula el progreso de la animación
-      const progress = linearProgress(time - startTime, duration);
+      let progress = linearProgress(time - startTime, duration);
 
       // Calcula la nueva posición de desplazamiento
       const newScroll =
@@ -46,10 +44,10 @@ const useSlideshow = ({setStartSlideShow,data}:useSlideshow) => {
       if (progress < 1) {
         requestAnimationFrame(animateScroll);
       }
+      setTimeout(() => {
+        setStartSlideShow!(false);
+      }, 10);
     }
-    setTimeout(() => {
-      setStartSlideShow!(false);
-    }, 2500);
     requestAnimationFrame(animateScroll);
   };
 
@@ -86,26 +84,28 @@ const useSlideshow = ({setStartSlideShow,data}:useSlideshow) => {
 
   const useAnimationMaximizeCover = () => {
     useEffect(() => {
-      const observerOptions: IntersectionObserverInit = {
-        rootMargin: "-50% 0% -50% 0% ",
-      };
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsOnView(entry.target.id);
-          }
+      if(window.innerWidth<720){
+        const observerOptions: IntersectionObserverInit = {
+          rootMargin: "-50% 0% -50% 0% ",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setIsOnView(entry.target.id);
+            }
+          });
+        }, observerOptions);
+
+        data.forEach((item) => {
+          const target = document.querySelector(`#card-${item.id}`);
+          observer.observe(target!);
         });
-      }, observerOptions);
-
-      data.forEach((item) => {
-        const target = document.querySelector(`#card-${item.id}`);
-        observer.observe(target!);
-      });
-
       return () => {
         observer.disconnect();
       };
+      }
     }, []);
   };
 
