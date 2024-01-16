@@ -21,7 +21,7 @@ const useSlideshow = ({setStartSlideShow,data}:useSlideshow) => {
     // Calcula la posición hacia abajo (puedes ajustar la cantidad según sea necesario)
     const targetScroll = currentScroll + area!.scrollHeight;
 
-    const duration = 20000;
+    const duration = 10000;
 
     const startTime = performance.now();
 
