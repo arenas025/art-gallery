@@ -7,7 +7,7 @@ export interface headerInterface {
   setStartSlideShow?: Dispatch<SetStateAction<boolean>>
 }
 
-export const Header = ({setStartSlideShow}: headerInterface) => {
+export const Header = () => {
   return (
     <header className="p-6 border-b-[1px]  border-semigray flex items-center justify-between mb-6">
       <Link href={"/"}>
@@ -19,9 +19,6 @@ export const Header = ({setStartSlideShow}: headerInterface) => {
           alt="galleria logo"
         />
       </Link>
-      <p onClick={()=>{setStartSlideShow!(true)}} className="font-baskerville text-[9px] tracking-[2px] cursor-pointer ">
-        START SLIDESHOW
-      </p>
     </header>
   );
 };

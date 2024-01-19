@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <main>
-      <Header setStartSlideShow={setStartSlideShow} />
+      <Header/>
       <MainCarrousel setStartSlideShow={setStartSlideShow} startSlideShow={startSlideShow} />
     </main>
   );

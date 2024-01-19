@@ -7,6 +7,7 @@ import { Header } from '../Header'
 import Stepper from '../Stepper'
 import { ShowImage } from '../showImage'
 import { useState } from 'react'
+import { useUrl } from '@/utils/useUrl'
 
 
 interface LayoutPageInterface {
@@ -23,18 +24,9 @@ interface LayoutPageInterface {
 
 export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,bigImage,source}: LayoutPageInterface) => {
 
-  const urlNext = data
-    .find((item) => item.id === id + 1)
-    ?.name.toLowerCase()
-    .replaceAll(" ", "-");
-
-    const urlBack = data
-      .find((item) => item.id === id + -1 )
-      ?.name.toLowerCase()
-      .replaceAll(" ", "-");
+  const {getUrlBack,getUrlNext} = useUrl({data,id})
 
     const [showImageActive, setShowImageActive] = useState<boolean>(false);
-
 
   return (
     <div className="flex flex-col">
@@ -52,7 +44,7 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,big
           onClick={() => {
             setShowImageActive(true);
           }}
-          className=" lg:top-[65%] cursor-pointer flex items-center justify-between p-3 tracking-widest  h-10 w-40 bg-black opacity-75 sm:z-20 absolute top-4 left-11"
+          className=" cursor-pointer flex items-center justify-between p-3 tracking-widest  h-10 w-40 bg-black opacity-75 sm:z-20 absolute top-4 left-11"
         >
           <Image
             src={"/assets/icons/expandImage.svg"}
@@ -82,7 +74,7 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,big
           <p className="max-[400px]:text-8xl max-[400px]:mt-10 tracking-[10px] mt-1 text-9xl font-baskerville font-bold text-semiwhite text-end sm:text-center lg:text-[200px]">
             {year}
           </p>
-          <p className=" lg:relative sm:-mt-16 text-justify font-baskerville align leading-7 -mt-7 text-sm text-gray sm:w-96 sm:left-[20%] lg:left-0">
+          <p className=" lg:relative sm:-mt-16 lg:-mt-24 text-justify font-baskerville align leading-7 -mt-7 text-sm text-gray sm:w-96 sm:left-[20%] lg:left-0">
             {description}{" "}
           </p>
           <Link href={source}>
@@ -94,8 +86,8 @@ export const Layout = ({description,id,author,imageArt,imageAuthor,name,year,big
             actualItem={id}
             totalItems={15}
             author={author}
-            back={`/${urlBack}`}
-            next={`/${urlNext}`}
+            back={`/${getUrlBack}`}
+            next={`/${getUrlNext}`}
             title={name}
             key={id}
             percentage={Math.floor((id / 15) * 100)}

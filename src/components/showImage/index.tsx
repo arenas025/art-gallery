@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { animated, useSpring } from 'react-spring';
 import { RotatingSquare } from "react-loader-spinner";
+import { useAnimationImages } from '@/utils/useAnimationImages';
 
 
 interface showImageInterface {
@@ -12,55 +13,9 @@ interface showImageInterface {
 }
 
 export const ShowImage = ({src,setShowImageActive}: showImageInterface) => {
-  const [springs,apiSprings] = useSpring(() => ({
-    from: { scale: 0 },
-  }));
-  
-  const [subContainer, subContainerApi] = useSpring(() => ({
-    from:{
-      scale:0
-    }
-  }));
-  
+ 
+  const{ closeComponent,imageLoad,setImageLoad,springs,subContainer,subContainerApi} = useAnimationImages({setShowImageActive})
 
-  const [imageLoad, setImageLoad] = useState<boolean>(false)
-
-  const closeComponent = () => {
-    subContainerApi.start({
-      from: {
-        scale: 1,
-      },
-      to: {
-        scale: 0,
-      },
-    });
-
-    apiSprings.start({
-      from: {
-        scale: 1,
-      },
-      to: {
-        scale: 0,
-      },
-    });
-    setTimeout(() => {
-      setShowImageActive(false);
-    },800);
-  } 
-
-  const onLoadImagine = () => {
-    apiSprings.start({
-      from: { scale: 0 },
-      to: { scale: 1 },
-    });
-  }
-
-  useEffect(()=>{
-    onLoadImagine()
-  },[])
-
-  console.log(imageLoad)
-  
   return (
     <div className="fixed w-screen h-screen">
       <animated.div
@@ -76,7 +31,7 @@ export const ShowImage = ({src,setShowImageActive}: showImageInterface) => {
             className="flex items-center justify-between absolute z-20 flex-col tracking-widest"
           >
             {imageLoad && (
-              <div className="self-end">
+              <div className="self-end cursor-pointer">
                 <p className="text-white font-baskerville self-end mb-8">
                   CLOSE
                 </p>

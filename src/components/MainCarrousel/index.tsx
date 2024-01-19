@@ -1,11 +1,10 @@
 "use client"
 
+import useSlideshow from "@/utils/useSlideshow";
 import { ChevronsUp } from "react-feather";
 import data from '../../../data.json';
 import { Card } from '../Card';
 import { headerInterface } from '../Header';
-import useSlideshow from "@/utils/useSlideshow";
-import { useEffect } from "react";
 
 
 interface carrouselInterface extends headerInterface {
@@ -15,16 +14,9 @@ interface carrouselInterface extends headerInterface {
 
 export const MainCarrousel = ({startSlideShow,setStartSlideShow}: carrouselInterface) => {
 
-const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlideshow({data,setStartSlideShow})
+const {backToTop,useAnimationMaximizeCover,isOnView} = useSlideshow({data,setStartSlideShow})
 
   useAnimationMaximizeCover();
-
-  if (startSlideShow){
-    slideshowStart()
-  }
-
-  
-  
 
   return (
     <div
@@ -50,7 +42,7 @@ const {backToTop,slideshowStart,useAnimationMaximizeCover,isOnView} = useSlidesh
         className="absolute cursor-pointer w-40 rounded-3xl items-center flex justify-center h-10 bg-[#ffffffc6] bottom-8 z-20"
       >
         <p className="text-black font-bold font-baskerville">
-          Volver al inicio
+          Back to the top
         </p>
         <ChevronsUp />
       </div>
